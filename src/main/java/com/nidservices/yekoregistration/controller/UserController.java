@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nidservices.yekoregistration.model.User;
@@ -26,7 +28,7 @@ public class UserController {
     @PostMapping("user")
 	public void processStudentDetails(@RequestBody User user) {
 		serviceRegistry.getService(user.getUserType()).addUserByType(user);
-		System.out.println(user);
+	
 	}
     
     @GetMapping("users/{userType}")
@@ -34,8 +36,10 @@ public class UserController {
    		return serviceRegistry.getService(user).findAllUser();
    	}
     
-    @GetMapping("user/{userType}")
-   	public Optional<User> retreivingSingleUser(@PathVariable("userType") String user, @RequestHeader UUID id) {
+    @GetMapping("user/{userType}/{id}")
+//    @RequestMapping(method=RequestMethod.GET, value="/user/{userType}/{id}")
+   	public Optional<User> retreivingSingleUser(@PathVariable("userType") String user, @PathVariable("id") UUID id) {
+    	System.out.println("This id is : " + id);	
    		return serviceRegistry.getService(user).selectUserById(id);
     }
    	

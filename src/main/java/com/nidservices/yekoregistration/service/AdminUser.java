@@ -18,13 +18,20 @@ public class AdminUser implements AdapterService<User>{
 		System.out.println("This is admin user registration - "  + request.toString());
 		UUID id = UUID.randomUUID();
 		DB.add(new User(id, request.getUserIdentifier(), request.getUserType(), request.getUserName()));
-		
 		return request;		
 	}
 	
 	@Override
 	public List<User> findAllUser() {
 		return DB;
+	}
+	
+	@Override
+	public Optional<User> selectUserById(UUID id) {
+		System.out.println("This id is : " + id);	
+		return DB.stream()
+				.filter(user -> user.getId().equals(id))
+				.findFirst();
 	}
 
 	@Override
@@ -42,14 +49,6 @@ public class AdminUser implements AdapterService<User>{
 				})
 				.orElse(0);
 	}
-	
-	@SuppressWarnings("unlikely-arg-type")
-	@Override
-	public Optional<User> selectUserById(UUID id) {
-		return DB.stream()
-				.filter(user -> String.valueOf(user.getId()).equals(id))
-				.findFirst();
-	}
 
 	@Override
 	public int deleteUserById(UUID id) {
@@ -59,6 +58,6 @@ public class AdminUser implements AdapterService<User>{
 		}
 		DB.remove(userMaybe.get());
 		return 1;
+    }
 	
-}
 }

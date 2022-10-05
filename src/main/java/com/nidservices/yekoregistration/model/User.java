@@ -7,7 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "user", uniqueConstraints= @UniqueConstraint(columnNames= "email"))
 public class User implements Serializable {
 	@Id
@@ -36,83 +42,19 @@ public class User implements Serializable {
 	private String[] phones;
 	private String[] adresses;
 	private String companyRegistrationNumber;
-	
-	
-	
-	/* Application user type constructor */
-	
-	public User(UUID id, String userIdentifier, String userType, String userName) {
-		this.id = id;
-	    this.userIdentifier= userIdentifier;
-	    this.userType= userType;
-	    this.userName= userName;
-				
-	}
-	
-	/* Admin user type constructor */
-	
-	public User(UUID id, String userIdentifier, String userType, String userName, String email) {
-		this.id = id;
-	    this.userIdentifier= userIdentifier;
-	    this.userType= userType;
-	    this.userName= userName;
-	    this.email= email;
-				
-	}
-	
-	/* Customer user type constructor */
-	
-	public User(UUID id, 
-			    String userIdentifier, 
-			    String userType, 
-			    String userName, 
-			    String firstName, 
-			    String lastName, 
-			    String email,
-			    String[] phones,
-			    String[] adresses
-			    
-			) {
-		this.id = id;
-	    this.userIdentifier= userIdentifier;
-	    this.userType= userType;
-	    this.userName= userName;
-	    this.firstName= firstName;
-	    this.lastName= lastName;
-	    this.email= email;
-	    this.phones= phones;
-	    this.adresses= adresses;
-	}
-	
-/* Seller user type constructor */
-	
-	public User(UUID id, 
-			    String userIdentifier, 
-			    String userType, 
-			    String userName, 
-			    String firstName, 
-			    String lastName, 
-			    String email,
-			    String[] phones,
-			    String[] adresses,
-			    String companyRegistrationNumber
-			    
-			) {
-		this.id = id;
-	    this.userIdentifier= userIdentifier;
-	    this.userType= userType;
-	    this.userName= userName;
-	    this.firstName= firstName;
-	    this.lastName= lastName;
-	    this.email= email;
-	    this.phones= phones;
-	    this.adresses= adresses;
-	    this.companyRegistrationNumber= companyRegistrationNumber;
-	}
-				
+			
 	
 	/* Getter and Setter */
 	
+	public User(UUID id2, String userIdentifier2, String userType2, String userName2) {
+		this.id = id2;
+		this.userIdentifier = userIdentifier2;
+		this.userType = userType2;
+		this.userName = userName2;
+		
+	}
+
+
 	public UUID getId() {
 		return id;
 	}
